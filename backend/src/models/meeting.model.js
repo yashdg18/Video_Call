@@ -1,6 +1,6 @@
-import mongoose, { Schema } from "mongoose";
+const mongoose = require("mongoose");
 
-const meetingSchema = new Schema(
+const meetingSchema = new mongoose.Schema(
     {
         user_id:     { type: String, required: true },
         meetingCode: { type: String, required: true },
@@ -11,4 +11,4 @@ const meetingSchema = new Schema(
 
 const Meeting = mongoose.model("Meeting", meetingSchema);
 
-export { Meeting };
+module.exports = { Meeting };

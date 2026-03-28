@@ -1,8 +1,7 @@
 {
-  "name": "video-meet-backend",
+  "name": "yash-meet-backend",
   "version": "1.0.0",
-  "description": "Video Meeting App Backend",
-  "type": "module",
+  "description": "YashMeet Video Calling Backend",
   "main": "src/app.js",
   "scripts": {
     "start": "node src/app.js",

@@ -1,17 +1,11 @@
-import dotenv from "dotenv";
-import path from "path";
-import { fileURLToPath } from "url";
+require("dotenv").config();
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-dotenv.config({ path: path.resolve(__dirname, "../.env") });
-
-import express from "express";
-import { createServer } from "node:http";
-import mongoose from "mongoose";
-import { connectToSocket } from "./controllers/socketManager.js";
-import cors from "cors";
-import userRoutes from "./routes/users.routes.js";
+const express = require("express");
+const { createServer } = require("http");
+const mongoose = require("mongoose");
+const { connectToSocket } = require("./controllers/socketManager");
+const cors = require("cors");
+const userRoutes = require("./routes/users.routes");
 
 const app = express();
 const server = createServer(app);
@@ -20,13 +14,20 @@ const io = connectToSocket(server);
 const PORT = process.env.PORT || 8000;
 const MONGODB_URI = process.env.MONGODB_URI;
 
-app.use(cors());
+app.use(cors({
+    origin: [
+        "https://video-call-frontend-zqah.onrender.com",
+        "http://localhost:3000"
+    ],
+    methods: ["GET", "POST"],
+    credentials: true
+}));
+
 app.use(express.json({ limit: "40kb" }));
 app.use(express.urlencoded({ limit: "40kb", extended: true }));
 
 app.use("/api/v1/users", userRoutes);
 
-// Health check route
 app.get("/", (req, res) => {
     res.json({ message: "Video Meet API is running!" });
 });
@@ -36,10 +37,8 @@ const start = async () => {
         if (!MONGODB_URI) {
             throw new Error("MONGODB_URI is not defined in .env file");
         }
-
         const connectionDb = await mongoose.connect(MONGODB_URI);
         console.log(`✅ MongoDB Connected: ${connectionDb.connection.host}`);
-
         server.listen(PORT, () => {
             console.log(`🚀 Server listening on http://localhost:${PORT}`);
         });

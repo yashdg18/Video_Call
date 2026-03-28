@@ -1,10 +1,10 @@
-import { Server } from "socket.io";
+const { Server } = require("socket.io");
 
 let connections = {};
 let messages = {};
 let timeOnline = {};
 
-export const connectToSocket = (server) => {
+const connectToSocket = (server) => {
     const io = new Server(server, {
         cors: {
             origin: "*",
@@ -22,29 +22,21 @@ export const connectToSocket = (server) => {
             if (!connections[roomId]) {
                 connections[roomId] = [];
             }
-
             connections[roomId].push(socket.id);
             timeOnline[socket.id] = new Date();
 
-            // Notify ALL users in room (including the new user) about the updated user list
             connections[roomId].forEach((id) => {
                 io.to(id).emit("user-joined", socket.id, connections[roomId]);
             });
 
-            // Send previous messages to the newly joined user only
             if (messages[roomId]) {
                 messages[roomId].forEach((msg) => {
-                    io.to(socket.id).emit(
-                        "chat-message",
-                        msg.data,
-                        msg.sender,
-                        msg.socketId
-                    );
+                    io.to(socket.id).emit("chat-message", msg.data, msg.sender, msg.socketId);
                 });
             }
         });
 
-        // SIGNAL (WebRTC peer-to-peer signaling)
+        // SIGNAL (WebRTC)
         socket.on("signal", (toId, message) => {
             io.to(toId).emit("signal", socket.id, message);
         });
@@ -52,30 +44,19 @@ export const connectToSocket = (server) => {
         // CHAT MESSAGE
         socket.on("chat-message", (data, sender) => {
             let roomId = null;
-
-            // Find which room this socket belongs to
             for (const [key, value] of Object.entries(connections)) {
                 if (value.includes(socket.id)) {
                     roomId = key;
                     break;
                 }
             }
-
             if (!roomId) return;
 
-            if (!messages[roomId]) {
-                messages[roomId] = [];
-            }
-
-            messages[roomId].push({
-                sender,
-                data,
-                socketId: socket.id
-            });
+            if (!messages[roomId]) messages[roomId] = [];
+            messages[roomId].push({ sender, data, socketId: socket.id });
 
             console.log(`💬 Message in room [${roomId}]: ${sender} → ${data}`);
 
-            // Broadcast message to all users in the room
             connections[roomId].forEach((id) => {
                 io.to(id).emit("chat-message", data, sender, socket.id);
             });
@@ -91,31 +72,25 @@ export const connectToSocket = (server) => {
 
             for (const [roomId, users] of Object.entries(connections)) {
                 if (users.includes(socket.id)) {
-
-                    // Notify remaining users
                     users.forEach((id) => {
-                        if (id !== socket.id) {
-                            io.to(id).emit("user-left", socket.id);
-                        }
+                        if (id !== socket.id) io.to(id).emit("user-left", socket.id);
                     });
 
-                    // Remove this socket from the room
                     connections[roomId] = users.filter((id) => id !== socket.id);
 
-                    // Clean up empty rooms
                     if (connections[roomId].length === 0) {
                         delete connections[roomId];
                         delete messages[roomId];
                         console.log(`🗑️  Room [${roomId}] deleted (empty)`);
                     }
-
-                    break; // A socket can only be in one room
+                    break;
                 }
             }
-
             console.log(`⏱️  User ${socket.id} was online for ${(onlineMs / 1000).toFixed(1)}s`);
         });
     });
 
     return io;
 };
+
+module.exports = { connectToSocket };
