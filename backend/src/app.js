@@ -20,28 +20,36 @@ const io = connectToSocket(server);
 const PORT = process.env.PORT || 8000;
 const MONGODB_URI = process.env.MONGODB_URI;
 
-app.use(cors());
+// ✅ CORS fix — allow your Render frontend
+app.use(cors({
+    origin: [
+        "https://video-call-frontend-zqah.onrender.com",
+        "http://localhost:3000"
+    ],
+    methods: ["GET", "POST"],
+    credentials: true
+}));
+
 app.use(express.json({ limit: "40kb" }));
 app.use(express.urlencoded({ limit: "40kb", extended: true }));
 
 app.use("/api/v1/users", userRoutes);
 
-// Health check route
 app.get("/", (req, res) => {
     res.json({ message: "Video Meet API is running!" });
 });
 
 const start = async () => {
     try {
-        if (!MONGODB_URI) {
-            throw new Error("MONGODB_URI is not defined in .env file");
+        // ✅ On Render, MONGODB_URI comes from environment variables (not .env file)
+        const uri = MONGODB_URI || process.env.MONGODB_URI;
+        if (!uri) {
+            throw new Error("MONGODB_URI is not defined");
         }
-
-        const connectionDb = await mongoose.connect(MONGODB_URI);
+        const connectionDb = await mongoose.connect(uri);
         console.log(`✅ MongoDB Connected: ${connectionDb.connection.host}`);
-
         server.listen(PORT, () => {
-            console.log(`🚀 Server listening on http://localhost:${PORT}`);
+            console.log(`🚀 Server listening on port ${PORT}`);
         });
     } catch (error) {
         console.error("❌ Failed to start server:", error.message);
