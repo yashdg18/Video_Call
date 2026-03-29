@@ -69,12 +69,12 @@ export default function Authentication() {
             {formState === 1 && (
               <div className="form-group">
                 <label>Full Name</label>
-                <input type="text" placeholder="Yash Dg" value={name} onChange={e => setName(e.target.value)} onKeyDown={handleKeyDown} className="form-input" />
+                <input type="text" placeholder="full name" value={name} onChange={e => setName(e.target.value)} onKeyDown={handleKeyDown} className="form-input" />
               </div>
             )}
             <div className="form-group">
               <label>Username</label>
-              <input type="text" placeholder="yashdg18" value={username} onChange={e => setUsername(e.target.value)} onKeyDown={handleKeyDown} className="form-input" />
+              <input type="text" placeholder="abc123" value={username} onChange={e => setUsername(e.target.value)} onKeyDown={handleKeyDown} className="form-input" />
             </div>
             <div className="form-group">
               <label>Password</label>
