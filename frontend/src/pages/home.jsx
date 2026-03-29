@@ -35,7 +35,7 @@ function HomeComponent() {
 
       <div className="home-hero">
         <div className="home-left">
-          <div className="hero-badge">✦ Your meeting space</div>
+          <div className="hero-badge">Your meeting space</div>
           <h1 className="home-title">Start or join a<br /><span className="hero-highlight">video meeting</span></h1>
           <p className="home-subtitle">Enter a meeting code to join an existing call, or generate a new one to invite others.</p>
 
