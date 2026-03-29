@@ -25,7 +25,7 @@ export default function LandingPage() {
 
       <div className="landingMainContainer">
         <div className="hero-left">
-          <div className="hero-badge">✦ Built by Yash Dg</div>
+          <div className="hero-badge">Built by ydg</div>
           <h1 className="hero-title">
             <span className="hero-highlight">Connect</span> with<br />
             anyone, anywhere
@@ -57,7 +57,7 @@ export default function LandingPage() {
       </div>
 
       <div className="landing-footer">
-        <p>© 2024 MeetMe · Built by <strong>Yash Dg</strong> · <a href="https://github.com/yashdg18" target="_blank" rel="noreferrer">github.com/yashdg18</a></p>
+        <p>© 2026 MeetMe · Built by <strong>ydg</strong> · <a href="https://github.com/yashdg18" target="_blank" rel="noreferrer">github.com/yashdg18</a></p>
       </div>
     </div>
   )
