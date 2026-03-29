@@ -56,9 +56,7 @@ export default function LandingPage() {
         </div>
       </div>
 
-      <div className="landing-footer">
-        <p>© 2026 MeetMe · Built by <strong>ydg</strong> · <a href="https://github.com/yashdg18" target="_blank" rel="noreferrer">github.com/yashdg18</a></p>
-      </div>
+      
     </div>
   )
 }
