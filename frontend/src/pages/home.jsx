@@ -25,7 +25,7 @@ function HomeComponent() {
       <nav className="home-nav">
         <div className="nav-logo">
           <span className="logo-icon">⬡</span>
-          <span className="logo-text">YashMeet</span>
+          <span className="logo-text">MeetMe</span>
         </div>
         <div className="home-nav-right">
           <button className="home-nav-btn outline" onClick={() => navigate('/history')}>📋 History</button>

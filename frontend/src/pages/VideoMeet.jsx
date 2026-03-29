@@ -300,7 +300,7 @@ export default function VideoMeetComponent() {
         <div className="lobby-card">
           <div className="nav-logo" style={{justifyContent:'center', marginBottom:'1.5rem'}}>
             <span className="logo-icon">⬡</span>
-            <span className="logo-text">YashMeet</span>
+            <span className="logo-text">MeetMe</span>
           </div>
           <h2 className="lobby-title">Join Meeting</h2>
           <p className="lobby-sub">Enter your name to join this video call</p>
@@ -329,7 +329,7 @@ export default function VideoMeetComponent() {
       <div className="meet-topbar">
         <div className="nav-logo">
           <span className="logo-icon">⬡</span>
-          <span className="logo-text">YashMeet</span>
+          <span className="logo-text">MeetMe</span>
         </div>
         <div className="meet-topbar-center">
           <div className="meet-timer">⏱ {formatTimer(elapsedSeconds)}</div>

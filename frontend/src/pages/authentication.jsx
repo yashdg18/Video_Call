@@ -42,7 +42,7 @@ export default function Authentication() {
         <div className="auth-left-content">
           <div className="nav-logo" style={{marginBottom:'2rem'}}>
             <span className="logo-icon">⬡</span>
-            <span className="logo-text">YashMeet</span>
+            <span className="logo-text">MeetMe</span>
           </div>
           <h2 className="auth-tagline">"Where great meetings happen."</h2>
           <p className="auth-sub">HD video · Live chat · Screen share · Secure</p>
@@ -51,14 +51,14 @@ export default function Authentication() {
             <div className="auth-feat">✓ End-to-end encrypted</div>
             <div className="auth-feat">✓ Works on any device</div>
           </div>
-          <div className="auth-credit">Built by <strong>Yash Dg</strong> · <a href="https://github.com/yashdg18" target="_blank" rel="noreferrer">github.com/yashdg18</a></div>
+          {/* <div className="auth-credit">Built by <strong>Yash Dg</strong> · <a href="https://github.com/yashdg18" target="_blank" rel="noreferrer">github.com/yashdg18</a></div> */}
         </div>
       </div>
 
       <div className="auth-right">
         <div className="auth-card">
           <h2 className="auth-title">{formState === 0 ? 'Welcome back' : 'Create account'}</h2>
-          <p className="auth-desc">{formState === 0 ? 'Sign in to your YashMeet account' : 'Join YashMeet today — it\'s free'}</p>
+          <p className="auth-desc">{formState === 0 ? 'Sign in to your MeetMe account' : 'Join MeetMe today — it\'s free'}</p>
 
           <div className="auth-tabs">
             <button className={`auth-tab ${formState === 0 ? 'active' : ''}`} onClick={() => setFormState(0)}>Sign In</button>

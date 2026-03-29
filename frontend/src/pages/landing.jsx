@@ -14,7 +14,7 @@ export default function LandingPage() {
       <nav className="landing-nav">
         <div className="nav-logo">
           <span className="logo-icon">⬡</span>
-          <span className="logo-text">YashMeet</span>
+          <span className="logo-text">MeetMe</span>
         </div>
         <div className="navlist">
           <span className="nav-link" onClick={() => router('/aljk23')}>Join as Guest</span>
@@ -49,7 +49,7 @@ export default function LandingPage() {
 
         <div className="hero-right">
           <div className="hero-card">
-            <img src="/mobile.png" alt="YashMeet App" className="hero-img" />
+            <img src="/mobile.png" alt="MeetMe App" className="hero-img" />
             <div className="floating-badge badge1">🔒 Encrypted</div>
             <div className="floating-badge badge2">⚡ Ultra-low latency</div>
           </div>
@@ -57,7 +57,7 @@ export default function LandingPage() {
       </div>
 
       <div className="landing-footer">
-        <p>© 2024 YashMeet · Built by <strong>Yash Dg</strong> · <a href="https://github.com/yashdg18" target="_blank" rel="noreferrer">github.com/yashdg18</a></p>
+        <p>© 2024 MeetMe · Built by <strong>Yash Dg</strong> · <a href="https://github.com/yashdg18" target="_blank" rel="noreferrer">github.com/yashdg18</a></p>
       </div>
     </div>
   )
